@@ -8,6 +8,8 @@ export default function Movie(props) {
 
   const { url, path } = useRouteMatch()
   const { id } = useParams()
+
+  // console.log('id from the URL', id)
   // Change ^^^ that line and use a hook to obtain the :id parameter from the URL
 
   useEffect(() => {
@@ -15,11 +17,10 @@ export default function Movie(props) {
       .get(`http://localhost:5000/api/movies/${id}`) // Study this endpoint with Postman
       .then(res => {
         // Study this response with a breakpoint or log statements
-        console.log(res.data)
+        setMovie(res.data)
         movie.find(movie => {
           return movie.id == id
         })
-        console.log(id)
         // and set the response data as the 'movie' slice of state
       })
       .catch(error => {
